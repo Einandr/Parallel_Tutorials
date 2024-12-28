@@ -10,7 +10,7 @@ float B[] = {4,5,6};
 float *C = (float *)malloc(arr_length * sizeof(float));
 
 
-
+float Add[] = {1,2,3};
 
 int main()
 {
