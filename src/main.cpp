@@ -21,7 +21,7 @@ for (i = 0; i < arr_length; i++)
     C[i] = A[i] + B[i];
 
 for (i = 0; i < arr_length; i++)
-std::cout << "A: " << A[i] << "B: " << B[i] << "C: " << C[i] << std::endl;
+std::cout << "A: " << A[i] << "  B: " << B[i] << "  C: " << C[i] << std::endl;
 
 
 }
