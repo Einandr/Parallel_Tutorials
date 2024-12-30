@@ -1,0 +1,23 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "Default",
+            "displayName": "Default",
+            "description": "Sets VS 17 2022 generator, build and install directory",
+            "generator": "Visual Studio 17 2022",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default-vs2022-release",
+            "configurePreset": "Default",
+            "configuration": "Release"
+        }
+    ]
+}
