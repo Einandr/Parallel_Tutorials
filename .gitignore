@@ -1,3 +1,6 @@
 desktop.ini 
-build 
+build
+profiler
+out 
 .vscode
+.vs

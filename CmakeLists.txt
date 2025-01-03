@@ -3,10 +3,41 @@ cmake_minimum_required(VERSION 3.31 FATAL_ERROR)
 set(PROJECT_NAME Parallel)
 project(${PROJECT_NAME})
 
+set(CMAKE_CUDA_STANDARD 12)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# enable_language(CUDA)
+set(CMAKE_EXPORT_COMPILE_COMMANDS true)
+find_package(OpenACC REQUIRED)
+
+# set(CMAKE_CUDA_ARCHITECTURES 80 86)
+# set(CMAKE_CUDA_LINK_EXECUTABLE "<CMAKE_CXX_COMPILER> <LINK_FLAGS> <OBJECTS> -o <TARGET>")
+
+# set(NVC_GPU_LIST ${CMAKE_CUDA_ARCHITECTURES})
+# list(TRANSFORM NVC_GPU_LIST PREPEND "cc")
+# list(JOIN NVC_GPU_LIST "," NVC_GPU_LIST)
+
+add_compile_options(-fopenacc -ftree-vectorize -ftree-vectorizer-verbose=2)
+
+# add_compile_options($<$<COMPILE_LANGUAGE:C,CXX>:-gpu=${NVC_GPU_LIST}>)
+# add_link_options(-Minfo=accel -acc -cuda -gpu=${NVC_GPU_LIST})
+
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenacc")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fopenacc")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -finput-charset=UTF-8 -fexec-charset=UTF-8")
 
 add_executable(${PROJECT_NAME}
 	src/main.cpp
 	)
+
+find_package(ZLIB)
+target_link_libraries(${PROJECT_NAME} ZLIB::ZLIB)
+# target_link_libraries(${PROJECT_NAME} OpenACC::OpenACC)
+set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_STANDARD 12)
 
 #target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
